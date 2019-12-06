@@ -17,9 +17,17 @@ const html = document.getElementsByTagName("html")[0];
 // *******************MAIN CONTENT******************** //
 // *************************************************** //
 
+
 chrome.runtime.onMessage.addListener((message) => {
-    console.log(`Message Received - ${message.url}`);
-    messageDiv.textContent = message.url;
-    body.classList.add("noScroll");
-    html.appendChild(fadeDiv);
+    const websiteURL = message.url;
+    const regexSearch = websiteURL.match(/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/i)
+    const domain = regexSearch[1].split(".")[0];
+
+    chrome.storage.sync.get(['name'], function(result) {
+        if(result.name === domain){
+            messageDiv.textContent = websiteURL;
+            body.classList.add("noScroll");
+            html.appendChild(fadeDiv);
+        }
+    });
 })

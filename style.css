@@ -16,6 +16,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background: #fff;
+    word-wrap: break-word;
 }
 
 .noScroll{
