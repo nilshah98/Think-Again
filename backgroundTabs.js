@@ -13,9 +13,28 @@ const getDomain = (websiteURL) => {
 }
 
 // Initializing blocked domains website
-chrome.storage.sync.get(["thinkAgain_blockedDomains"], (res) => {
-    if(Object.keys(res).length === 0 && res.constructor === Object){
-        chrome.storage.sync.set({"thinkAgain_blockedDomains": {}}, () => console.log("initialized"));
+chrome.storage.sync.get(null, (res) => {
+    if(res.hasOwnProperty("currDate") != new Date().toDateString()){
+        if(res.currDate){        
+            res.currDate = new Date().toDateString();
+            // WIPE
+            console.log("WIPE!");
+            Object.keys(res.thinkAgain_blockedDomains).forEach((domain) => res.thinkAgain_blockedDomains[domain] = [0,0,0]);
+            console.log(res);
+        }
+    }
+    else{
+        res.currDate = new Date().toDateString();
+        Object.keys(res.thinkAgain_blockedDomains).forEach((domain) => res.thinkAgain_blockedDomains[domain] = [0,0,0]);
+        console.log(res);
+    }
+
+    if(!res.hasOwnProperty("thinkAgain_blockedDomains")){
+        res.thinkAgain_blockedDomains = {};
+        chrome.storage.sync.set(res, () => console.log("initialized"));
+    }
+    else{
+        chrome.storage.sync.set(res, () => console.log("initialized"));
     }
 })
 
