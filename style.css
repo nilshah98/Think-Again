@@ -4,8 +4,10 @@
     left: 0;
     bottom: 0;
     right: 0;
-    background: rgba(0,0,0,0.9);
+    background: rgba(0,0,0,1);
     z-index: 99999;
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .messageDiv{
@@ -17,6 +19,22 @@
     transform: translate(-50%, -50%);
     background: #fff;
     word-wrap: break-word;
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.messageText{
+    display: block;
+}
+
+.messageButtons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 10px;
 }
 
 .noScroll{
@@ -31,6 +49,14 @@
     cursor: pointer;
     color: #fff;
     display: inline-block;
+    border-radius: 5px;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,0.5);
+    transition: all .3s linear;
+}
+
+.button:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.5);
 }
 
 .carryOn{
@@ -39,4 +65,12 @@
 
 .getMeOut{
     background: green;
+}
+
+.blocked{
+    pointer-events: none;
+}
+
+.noCursor{
+    cursor: no-drop;
 }
