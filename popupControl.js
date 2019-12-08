@@ -3,7 +3,11 @@ const websiteInp = document.getElementsByClassName("input")[0];
 
 addButton.addEventListener("click",(e) => {
     const website = websiteInp.value;
-    chrome.storage.sync.set({name: website}, function() {
-        console.log('Value is set to ' + website);
-    });
+    chrome.storage.sync.get(["thinkAgain_blockedDomains"], (res) => {
+        if(!res.thinkAgain_blockedDomains.hasOwnProperty(website)){
+            res.thinkAgain_blockedDomains[website] = [0,0,0]
+            const fin = res.thinkAgain_blockedDomains;
+            chrome.storage.sync.set({"thinkAgain_blockedDomains": fin});
+        }
+    })
 })
