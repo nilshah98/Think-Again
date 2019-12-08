@@ -1,0 +1,18 @@
+.blockedDomain--list{
+    display: flex;
+    flex-direction: column;
+}
+
+.blockDomain--list--item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.blockDomain--list--item--text{
+    color: black;
+}
+
+.blockDomain--list--item--button{
+    cursor: pointer;
+}
