@@ -1,16 +1,12 @@
-.fadeDiv {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: rgba(0,0,0,1);
-    z-index: 99999;
-    font-size: 15px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.messageDiv{
+/*************************************** MESSAGE STYLES *****************************************/
+/* 
+    message__container
+        message__textContainer
+            message__text
+        message__buttonContainer
+            message__button
+*/
+.message__container{
     position: absolute;
     width: 400px;
     height: 200px;
@@ -23,18 +19,109 @@
     padding: 10px;
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
+    font-size: 15px;
+}
+
+.message__textContainer{
+    white-space: pre;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    text-align: center;
+    margin: 5px;
 }
 
-.messageText{
-    display: block;
+.message__text{
+    /* padding: 2px; */
 }
 
-.messageButtons{
+.message__highlight{
+    color: #000;
+    position: relative;
+    cursor: pointer;
+    font-weight: 550;
+    font-size: 1.25em;
+}
+
+.message__highlight::before{
+    content: "";
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    height: .5em;
+    bottom: 0;
+    background: rgb(0, 162, 255);
+    opacity: .5;
+    transition: all .3s ease-in-out;
+}
+
+.message__highlight--low::before{
+    background: #d3c60c;
+}
+
+.message__highlight--medium::before{
+    background: #d3830b;
+}
+
+.message__highlight--high::before{
+    background: #c91919;
+}
+
+.message__timeLeftWrapper{
+    margin: 10px 5px;
+    border: 2px solid #d3c60c;
+    width: 85%;
+    margin: auto;
+    height: 1.5em;
+    text-align: center;
+    color: #555;
+    position: relative;
+    border-radius: 5px;
+}
+
+.message__timeLeft{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #d3c60c;
+    height: 100%;
+}
+
+.message__buttonContainer{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     margin: 10px;
+}
+
+.message__button{
+    margin: 5px;
+    padding: 5px;
+    cursor: pointer;
+    color: #fff;
+    display: inline-block;
+    border-radius: 5px;
+    /* box-shadow: 0 2px 3px 0 rgba(0,0,0,0.5); */
+    transition: all .3s linear;
+    width: 100px;
+    text-align: center;
+}
+
+.message__button:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 3px 10px 0 rgba(0,0,0,0.5);
+}
+
+
+/*************************************** INDIVIDUAL STYLES *****************************************/
+
+.carryOn{
+    background: #c91919c7;
+}
+
+.getMeOut{
+    background: rgba(50, 200, 75, 0.9);
 }
 
 .noScroll{
@@ -42,35 +129,14 @@
     /* filter: blur(10px); */
 }
 
-.button{
-    margin: 5px;
-    padding: 5px;
-    background: #4287f5;
-    cursor: pointer;
-    color: #fff;
-    display: inline-block;
-    border-radius: 5px;
-    box-shadow: 0 2px 3px 0 rgba(0,0,0,0.5);
-    transition: all .3s linear;
-}
-
-.button:hover{
-    transform: translateY(-3px);
-    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.5);
-}
-
-.carryOn{
-    background: crimson;
-}
-
-.getMeOut{
-    background: green;
-}
-
-.blocked{
-    pointer-events: none;
-}
-
-.noCursor{
-    cursor: no-drop;
+.fade{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,1);
+    z-index: 99999;
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
