@@ -7,6 +7,7 @@ chrome.storage.sync.get("thinkAgain_blockedDomains", (res) => {
     const createRow = (domain) => {
         const row = document.createElement("div");
         row.classList.add("blockDomain--list--item");
+        row.id = domain;
     
         const text = document.createElement("div");
         text.classList.add("blockDomain--list--item--text")
@@ -14,10 +15,20 @@ chrome.storage.sync.get("thinkAgain_blockedDomains", (res) => {
     
         const button = document.createElement("div");
         button.classList.add("blockDomain--list--item--button");
-        button.textContent = "X";
+        button.textContent = "Remove";
     
         row.appendChild(text);
         row.appendChild(button);
+
+        row.addEventListener("click", (e) => {
+            if(e.target.classList.contains("blockDomain--list--item--button")){
+                const domain = row.id;
+                row.style.display = "none";
+                delete res.thinkAgain_blockedDomains[domain];
+
+                chrome.storage.sync.set({"thinkAgain_blockedDomains": res.thinkAgain_blockedDomains});
+            }
+        })
     
         return row;
     }

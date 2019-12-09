@@ -14,8 +14,8 @@ const getDomain = (websiteURL) => {
 
 // Initializing blocked domains website
 chrome.storage.sync.get(null, (res) => {
-    if(res.hasOwnProperty("currDate") != new Date().toDateString()){
-        if(res.currDate){        
+    if(res.hasOwnProperty("currDate")){
+        if(res.currDate  != new Date().toDateString()){        
             res.currDate = new Date().toDateString();
             // WIPE
             console.log("WIPE!");
