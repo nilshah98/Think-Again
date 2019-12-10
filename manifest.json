@@ -4,30 +4,30 @@
     "version": "1.0",
     "manifest_version": 2,
     "browser_action":{
-        "default_popup": "popup.html",
+        "default_popup": "popup/popup.html",
         "default_title": "Think Again"
       },
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
             "run_at": "document_start",
-            "js": ["content.js"],
-            "css": ["style.css"]
+            "js": ["content/content.js"],
+            "css": ["content/style.css"]
         },
         {
             "matches": ["<all_urls>"],
             "run_at": "document_end",
-            "js": ["content1.js"],
-            "css": ["style.css"]
+            "js": ["content/content1.js"],
+            "css": ["content/style.css"]
         }
     ],
     "background": {
         "scripts":[
-            "backgroundTabs.js"
+            "background/backgroundTabs.js"
         ],
         "persistent": false
     },
-    "options_page": "options.html",
+    "options_page": "options/options.html",
     "permissions":[
         "background",
         "tabs",
