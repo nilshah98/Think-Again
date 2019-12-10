@@ -34,6 +34,10 @@ timeLeft.classList.add("message__timeLeft");
 // Weirdly doesn't work with template string, needto append after template string declared
 // timeLeftWrapper.appendChild(timeLeft);
 
+// Creating motivation line
+const motivationalQuote = document.createElement("div");
+motivationalQuote.classList.add("message__motivation");
+
 // Create carry on button
 const carryOn = document.createElement("div");
 carryOn.classList.add("message__button");
@@ -54,8 +58,10 @@ messageTexts.appendChild(textDomain);
 messageTexts.appendChild(textOpened);
 messageTexts.appendChild(textSpent);
 
+messageDiv.appendChild(motivationalQuote);
 messageDiv.appendChild(messageTexts);
 messageDiv.appendChild(timeLeftWrapper);
+
 messageDiv.appendChild(messageButtons);
 fade.appendChild(messageDiv);
 
@@ -68,14 +74,14 @@ carryOn.addEventListener("click",() => {
 })
 
 getMeOut.addEventListener("click",() => {
-    document.location = "https://www.google.com/";
+    chrome.storage.sync.get(null, (res) => document.location = res.hasOwnProperty("redirect") ? res.redirect : "https://www.google.com/");
 })
 
 // ********************************************************************************************************************************** //
 // ******************************************************MAIN CONTENT**************************************************************** //
 // ********************************************************************************************************************************** //
 
-chrome.runtime.onMessage.addListener((message,_sender,_sendResponse) => {
+const dispMessage = (message) => {
     console.log("message received");
     console.log(message);
 
@@ -94,9 +100,15 @@ chrome.runtime.onMessage.addListener((message,_sender,_sendResponse) => {
     timeLeftWrapper.appendChild(timeLeft);
 
     textDomain.innerHTML = `Stop accessing, <span class="message__highlight">${message.domain}</span>`;
-    textOpened.innerHTML = `You've unlocked it <span class="message__highlight message__highlight--medium">${message.timesOpened}</span> times today`;
-    textSpent.innerHTML = `And spent <span class="message__highlight message__highlight--high">${((message.timeSpent)/60000).toFixed(2)}</span> minutes today`;
+    textOpened.innerHTML = `You've unlocked it <span class="message__highlight">${message.timesOpened}</span> times today`;
+    textSpent.innerHTML = `And spent <span class="message__highlight">${((message.timeSpent)/60000).toFixed(2)}</span> minutes today`;
+    
+    motivationalQuote.textContent = `${message.motivation}`;
 
     html.classList.add("noScroll");
     html.appendChild(fade);
+}
+
+chrome.runtime.onMessage.addListener((message,_sender,_sendResponse) => {
+    dispMessage(message);
 })

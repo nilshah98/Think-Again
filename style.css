@@ -9,7 +9,7 @@
 .message__container{
     position: absolute;
     width: 400px;
-    height: 200px;
+    height: 250px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -30,6 +30,16 @@
     justify-content: center;
     text-align: center;
     margin: 5px;
+}
+
+.message__motivation{
+    text-align: center;
+    font-weight: bold;
+    font-style: italic;
+    background: #d3c60ce7;
+    line-height: 2em;
+    border-radius: 3px;
+    margin: 10px 2px;
 }
 
 .message__text{
@@ -70,7 +80,7 @@
 
 .message__timeLeftWrapper{
     margin: 10px 5px;
-    border: 2px solid #d3c60c;
+    border: 2px solid rgb(0, 162, 255);
     width: 85%;
     margin: auto;
     height: 1.5em;
@@ -84,7 +94,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background: #d3c60c;
+    background: rgba(0, 162, 255, 0.5);
     height: 100%;
 }
 

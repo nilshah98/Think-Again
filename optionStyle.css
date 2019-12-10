@@ -1,42 +1,62 @@
-.blockedDomain--list{
+.list__wrapper{
     display: flex;
     flex-direction: column;
-    max-width: 1000px;
+    max-width: 750px;
     margin: auto;
     font-size: 15px;
 }
 
-.blockDomain--list--item{
+.list__item{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin: 5px;
     padding: 5px;
-    border-radius: 5px;
-    border: 3px solid #000;
+    /* border-radius: 5px; */
+    border-bottom: 1px solid #000;
+    align-items: center;
 }
 
-.blockDomain--list--item--text{
+.list__itemText{
+    line-height: 2em;
+    color: black;
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    justify-content: space-evenly;
+}
+
+.list__quoteText{
     line-height: 2em;
     color: black;
 }
 
-.blockDomain--list--item--button{
+.list__itemButton{
     cursor: pointer;
-    /* background: crimson; */
-    color: #000;
+    background: crimson;
+    color: #fff;
     border: 2px solid crimson;
     padding: 5px;
     border-radius: 5px;
-    /* box-shadow: 0 2px 4px 0 rgba(0,0,0,0.8); */
-    transition: all .2s linear;
+    box-shadow: 0 0px 0px 0 rgba(0,0,0,0.8);
+    transition: all .1s linear;
 }
 
-.blockDomain--list--item--button:hover{
-    /* transform: translateY(-5px); */
-    /* box-shadow: 0 5px 10px 0 rgba(0,0,0,0.5); */
-    background: crimson;
-    color: #fff;
+.list__itemButton:hover{
+    transform: translateY(-2.5px);
+    box-shadow: 0 2.5px 6px 0 rgba(0,0,0,0.5);
+    /* background: crimson; */
+    /* color: #fff; */
 }
 
+.list__heading{
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.3em;
+    margin: 5px 0;
+}
+
+.redirect__text{
+    margin: 5px 0;
+}
 
