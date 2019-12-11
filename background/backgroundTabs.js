@@ -1,7 +1,7 @@
 const getDomain = (websiteURL) => {
     const regexSearch = websiteURL.match(/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/i)
-    const domain = regexSearch[1].split(".")[0];
-    return domain;
+    const domainSearch = regexSearch[1].split(".");
+    return domainSearch[domainSearch.length - 2];
 }
 
 const contactContent = (tab,tid) => {
