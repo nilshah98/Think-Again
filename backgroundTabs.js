@@ -4,10 +4,11 @@
 
 // lastDomain and lastTime are not persistent, so stored as is.
 // Need to use lastDomain to update in chrome storage
-var lastDomain;
+var lastDomain = null;
 // SyncLastDomain so as to not get any lags with other concurrent events
-var syncLastDomain;
-var lastTime;
+var syncLastDomain = null;
+var lastTime = new Date();
+var currDomain = null;
 
 const getDomain = (websiteURL) => {
     const regexSearch = websiteURL.match(/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/i)
@@ -17,7 +18,7 @@ const getDomain = (websiteURL) => {
 
 const contactContent = (tab,tid) => {
     if(tab.url && tab.active){
-        const currDomain = getDomain(tab.url);
+        currDomain = getDomain(tab.url);
 
         if(currDomain != syncLastDomain){
             syncLastDomain = currDomain;
@@ -95,11 +96,11 @@ chrome.storage.sync.get(null, (res) => {
 
 // Initializeing last website and last time
 // This won't be persistent so not using any kind of storage here
-chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
-    lastDomain = getDomain(tabs[0].url);
-    syncLastDomain = getDomain(tabs[0].url);
-    lastTime = new Date();
-});
+// chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+//     lastDomain = getDomain(tabs[0].url);
+//     syncLastDomain = getDomain(tabs[0].url);
+//     lastTime = new Date();
+// });
 
 // *************************************************************************************************
 // **************************************EVENT LISTENERS********************************************
@@ -112,3 +113,18 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
 
 // Checking for updated tabs which are active
 chrome.tabs.onUpdated.addListener((tid, _changeInfo, tab) => contactContent(tab,tid))
+
+chrome.windows.onRemoved.addListener(() => {
+    chrome.storage.sync.get(null, (res) => {
+        syncLastDomain = null;
+        console.log(`Got result after browser closed ${currDomain}`);
+        if(res.thinkAgain_blockedDomains.hasOwnProperty(currDomain)){
+            res.thinkAgain_blockedDomains[currDomain][0] += 1;
+            res.thinkAgain_blockedDomains[currDomain][1] += (new Date() - lastTime);
+            chrome.storage.sync.set({"thinkAgain_blockedDomains" : res.thinkAgain_blockedDomains}, () => {
+                lastDomain = null;
+                console.log("Set result after browser closed");
+            });
+        }
+    })
+})
