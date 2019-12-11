@@ -7,6 +7,7 @@ const redirectInp = document.getElementsByClassName("form__input")[1];
 const motivationAdd = document.getElementsByClassName("form__button")[2];
 const motivationInp = document.getElementsByClassName("form__input")[2];
 
+const openOptions = document.getElementsByClassName("openOptions")[0];
 
 domainAdd.addEventListener("click",(_e) => {
     const website = domainInp.value;
@@ -25,7 +26,6 @@ redirectAdd.addEventListener("click",(_e) => {
     chrome.storage.sync.set({"redirect":redirect}, (_res) => redirectInp.value = "");
 })
 
-const openOptions = document.getElementsByClassName("openOptions")[0];
 openOptions.addEventListener("click", () => chrome.runtime.openOptionsPage());
 
 motivationAdd.addEventListener("click",(_e) => {
